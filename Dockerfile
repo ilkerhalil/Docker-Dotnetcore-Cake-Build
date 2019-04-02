@@ -40,4 +40,6 @@ ENV ASPNETCORE_URLS=http://+:80 \
     NUGET_XMLDOC_MODE=skip
 
 RUN dotnet tool install -g Cake.Tool
+CMD /bin/sh
+
 
