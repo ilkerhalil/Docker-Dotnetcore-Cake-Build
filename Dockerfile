@@ -7,7 +7,7 @@ RUN apt update
 RUN apt install mono-complete
 # Install software for GitVersion
 RUN apt-get clean && apt-get update \
-  && apt-get install -y --no-install-recommends unzip git libcurl3 libc6 libc6-dev libc6-dbg libgit2-24 \
+  && apt-get install -y --no-install-recommends wget unzip git libcurl3 libc6 libc6-dev libc6-dbg libgit2-24 \
   && rm -rf /var/lib/apt/lists/* /tmp/*
 
 #install dotnetcore sdk 2.2
