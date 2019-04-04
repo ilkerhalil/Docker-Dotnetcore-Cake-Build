@@ -35,6 +35,9 @@ RUN apt install -y mono-complete
 RUN apt-get clean && apt-get update \
   && apt-get install -y --no-install-recommends wget unzip git libc6 libc6-dev libc6-dbg libgit2-24 \
   && rm -rf /var/lib/apt/lists/* /tmp/*
+  
+CMD /bin/sh
+
 
 
 
