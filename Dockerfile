@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM buildpack-deps:bionic-scm
 
 # Install .NET CLI dependencies
 RUN apt-get update \
@@ -6,12 +6,11 @@ RUN apt-get update \
         libc6 \
         libgcc1 \
         libgssapi-krb5-2 \
-        libicu57 \
+        libicu60 \
         liblttng-ust0 \
-        libssl1.0.2 \
+        libssl1.0.0 \
         libstdc++6 \
         zlib1g \
-        libcurl3 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install .NET Core SDK
