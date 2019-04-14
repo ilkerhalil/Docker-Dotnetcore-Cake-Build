@@ -33,10 +33,22 @@ RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends mono-devel \
 	&& rm -rf /var/lib/apt/lists/* \
     && apt-get clean
+# Dependencies for libgit2
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	libc6 \
+	zlib1g-dev \
+	libcomerr2 \
+	libc6-dev \
+	libgcrypt20 \
+	libkeyutils1 \
+	libcurl3-gnutls \
+	libsasl2-2 \
+	libgpg-error0 \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Install software for GitVersion
 RUN apt-get clean && apt-get update \
-  && apt-get install -y --no-install-recommends wget unzip git libc6 libc6-dev libc6-dbg libgit2-24 \
+  && apt-get install -y --no-install-recommends wget unzip git libc6 libc6-dev libc6-dbg libgit2-26 libgit2-dev  \
   && rm -rf /var/lib/apt/lists/* /tmp/*
 RUN dotnet tool install --global GitVersion.Tool --version 5.0.0-beta2-61
 RUN apt-get update && apt-get install jq -y
