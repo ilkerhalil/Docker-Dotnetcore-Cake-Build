@@ -1,4 +1,4 @@
-FROM buildpack-deps:stretch-scm
+FROM ubuntu:16.04
 
 # Install .NET CLI dependencies
 RUN apt-get update \
@@ -25,14 +25,11 @@ RUN curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotn
     && rm dotnet.tar.gz \
     && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 #Install Mono
-RUN apt-get update -qq \
-    && apt-get install -y apt-transport-https \
-    && apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-    && echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
-    && apt-get update -qq \
-    && apt-get install -y --no-install-recommends mono-devel \
-	&& rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+RUN apt install apt-transport-https ca-certificates
+RUN  echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" |  tee /etc/apt/sources.list.d/mono-official-stable.list
+RUN apt update
+RUN apt install mono-complete
 # Dependencies for libgit2
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	libc6 \
@@ -48,7 +45,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install software for GitVersion
 RUN apt-get clean && apt-get update \
-  && apt-get install -y --no-install-recommends wget unzip git libc6 libc6-dev libc6-dbg libgit2-dev  \
+  && apt-get install -y --no-install-recommends wget unzip git libc6 libc6-dev libc6-dbg libgit2-dev libgit2-26  \
   && rm -rf /var/lib/apt/lists/* /tmp/*
 RUN dotnet tool install --global GitVersion.Tool --version 5.0.0-beta2-61
 RUN apt-get update && apt-get install jq -y
