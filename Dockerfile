@@ -39,5 +39,6 @@ RUN apt-get clean && apt-get update \
   && apt-get install -y --no-install-recommends wget unzip git libc6 libc6-dev libc6-dbg libgit2-24 \
   && rm -rf /var/lib/apt/lists/* /tmp/*
 RUN dotnet tool install --global GitVersion.Tool --version 5.0.0-beta2-61
+RUN apt-get update && apt-get install jq -y
   
 CMD /bin/sh
