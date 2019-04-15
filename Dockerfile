@@ -28,7 +28,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
 RUN apt install apt-transport-https ca-certificates
 RUN  echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" |  tee /etc/apt/sources.list.d/mono-official-stable.list
 RUN apt update
-RUN apt install mono-complete
+RUN apt install mono-devel
 # Dependencies for libgit2
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	libc6 \
